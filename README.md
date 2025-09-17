@@ -1,13 +1,15 @@
-# Z3 Solving
+# LaZ3 Solving
 
-A different paradigm of solving problems with huge search space and writing the algorithm is not trivial.  
-Also it fairs well when you want to proof that no bad case exists. When you may need to generate tricky input automatically.
+A different paradigm of solving problems with huge search space where writing the algorithm is not trivial.  
+Proof driven to guarantee that no bad case exists. When you may need to generate tricky input automatically.
 
-## Wrong problems but to learn better
-These problems are too basic to use z3 solvers but 
+## Problems
+Some problems are too basic to use z3 solvers but good starting point to understand and learn z3. Some problems are complex using standard algos but are best candidates based on search space.
+
+**Wrong problems but to learn better**  
 * [Two sum](/laz3solving/problems/twosum.py)
 
-## Right problems but complex algorithmic solution
+**Right problems but complex algorithmic solution**
 * [Subset sum](/laz3solving/problems/subsetsum.py)
 * [Coin Change](/laz3solving/problems/coinchange.py)
 
@@ -15,8 +17,18 @@ These problems are too basic to use z3 solvers but
 ## Solvers setup and run
 1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/)
 2. Setup environment `uv sync`
-3. Run problems `uv run -m laz3solving.problems.twosum` or `uv run laz3` | specifically run a single one using uv run laz3 twosum
+3. Run problems using any of the way below
+```bash
+# As a module
+uv run -m laz3solving.problems.twosum 
+uv run laz3 # run all problems
+uv run laz3 twosum # run single file twosum.py
+```
 4. Add a new problem solver with just `@solver` annotation and `run_solvers` with examples
+
+## Resources
+[Z3 Solver Paper](https://link.springer.com/content/pdf/10.1007/978-3-540-78800-3_24.pdf)  
+[Dumb Intro to Z3](https://asibahi.github.io/thoughts/a-gentle-introduction-to-z3/)
 
 ## Change Log
 
