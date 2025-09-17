@@ -1,33 +1,15 @@
-# Subset sum
+# Subsetsum
+__title__ = "Subset sum"
 from z3 import *
-from functools import wraps
-import timeit
+from ..laz3 import solver, run_solvers
+
 
 # Problem: Given a list of numbers and a target, find a subset of numbers that add up to the target.
 # Example: nums = [3, 34, 4, 12, 5, 2], target = 9
 # Output: [4, 5] because 4 + 5 = 9
 
 
-def subset_sum_decorator(title="Subset Sum Solver"):
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            print(f"Running {title}...")
-            start_time = timeit.default_timer()
-            result = func(*args, **kwargs)
-            end_time = timeit.default_timer()
-            elapsed_time = end_time - start_time
-            if result is None:
-                print("No solution found")
-            else:
-                print(
-                    f"Subset found for {func.__name__}, args: {args}, subset: {result}. Time taken: {elapsed_time:.6f} seconds")
-            return result
-        return wrapper
-    return decorator
-
-
-@subset_sum_decorator(title="Backtracking Subset Sum")
+@solver(title="Backtracking Subset Sum")
 def subset_sum(nums, target):
     # A simple backtracking approach to find a subset that sums to the target
     def backtrack(start, current_sum, subset):
@@ -45,7 +27,7 @@ def subset_sum(nums, target):
     return backtrack(0, 0, [])
 
 
-@subset_sum_decorator(title="Dynamic Programming Subset Sum")
+@solver(title="Dynamic Programming Subset Sum")
 def subset_sum_optimal(nums, target):
     n = len(nums)
     dp = [[False] * (target + 1) for _ in range(n + 1)]
@@ -68,7 +50,7 @@ def subset_sum_optimal(nums, target):
     return subset[::-1]
 
 
-@subset_sum_decorator(title="Z3 SMT Solver Subset Sum")
+@solver(title="Z3 SMT Solver Subset Sum")
 def subset_sum_z3(nums, target):
     """Solve the subset sum problem using Z3 SMT solver.
     No Loops, no backtracking, just constraints and solving.
@@ -93,7 +75,7 @@ def subset_sum_z3(nums, target):
         return None
 
 
-@subset_sum_decorator(title="Optimal Z3 SMT Solver Subset Sum")
+@solver(title="Optimal Z3 SMT Solver Subset Sum")
 def subset_sum_z3_optimal(nums, target):
     """Optimal solution with smallest subset using Z3 SMT solver."""
     n = len(nums)
@@ -113,21 +95,5 @@ def subset_sum_z3_optimal(nums, target):
         return None
 
 
-def run_subset_solvers(nums, target):
-    print(f"Solving Subset Sum Problem for nums={nums} and target={target}")
-    subset_sum(nums, target)
-    subset_sum_optimal(nums, target)
-    subset_sum_z3(nums, target)
-    subset_sum_z3_optimal(nums, target)
-    print("\n")
-
-
-# Example usage
-nums = [3, 34, 4, 12, 5, 2]
-target = 9
-run_subset_solvers(nums, target)
-
-# Complex examples
-nums = [3, 34, 4, 12, 5, 2, 7, 8, 10, 15, 20, 25]
-target = 30
-run_subset_solvers(nums, target)
+run_solvers([3, 34, 4, 12, 5, 2], 9)
+run_solvers([3, 34, 4, 12, 5, 2, 7, 8, 10, 15, 20, 25], 30)

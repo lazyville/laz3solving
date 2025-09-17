@@ -1,10 +1,22 @@
 [project]
-name = "z3solving"
+name = "laz3solving"
 version = "0.1.0"
-description = "Solve Standard Algorithmic problems using Z3 SMT Solver"
+description = "Lazy solve standard algorithmic problems using Z3 SMT Solver"
 readme = "README.md"
 requires-python = ">=3.9"
+packages = ["laz3solving", "problems"]
 dependencies = [
     "func-timeout>=4.3.5",
     "z3-solver>=4.15.3.0",
 ]
+
+[project.scripts]
+laz3 = "laz3solving.main:z3solve"
+
+[build-system]
+requires = ["uv_build>=0.8.17,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+# Use flat layout instead of the default src/
+module-root = ""

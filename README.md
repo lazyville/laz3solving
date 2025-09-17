@@ -5,17 +5,18 @@ Also it fairs well when you want to proof that no bad case exists. When you may 
 
 ## Wrong problems but to learn better
 These problems are too basic to use z3 solvers but 
-* [Two sum](/problems/twosum.py)
+* [Two sum](/laz3solving/problems/twosum.py)
 
 ## Right problems but complex algorithmic solution
-* [Subset sum](/problems/subsetsum.py)
-* [Coin Change](/problems/coinchange.py)
+* [Subset sum](/laz3solving/problems/subsetsum.py)
+* [Coin Change](/laz3solving/problems/coinchange.py)
 
 
-## Setup and run
+## Solvers setup and run
 1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/)
 2. Setup environment `uv sync`
-3. Run problems `uv run problems/coinchange.py`
+3. Run problems `uv run -m laz3solving.problems.twosum` or `uv run laz3` | specifically run a single one using uv run laz3 twosum
+4. Add a new problem solver with just `@solver` annotation and `run_solvers` with examples
 
 ## Change Log
 

@@ -1,5 +1,6 @@
+__title__ = "Two Sum Problem"
 from z3 import *
-
+from ..laz3 import solver, run_solvers
 # Z3 solves well when a search space is huge and writing the
 # algorithm is non-trivial. Here, we use Z3 to solve a simple
 # two-sum problem to solve it but it's not the best tool for this job.
@@ -9,6 +10,7 @@ from z3 import *
 # Example: nums = [1, 3, 9, 11, 16, 15, 20], target = 25
 # Output: (9, 16) because 9 + 16 = 25
 
+@solver("Two Sum Problem Solver")
 def two_sum(nums, target):
     seen = {}
     for i, num in enumerate(nums):
@@ -19,6 +21,7 @@ def two_sum(nums, target):
     return None
 
 
+@solver("Two Sum Problem using Z3 SMT Solver")
 def two_sum_z3(nums, target):
     # Declare vars -> Add Constraints -> Solve
     # Z3 Variables
@@ -45,15 +48,13 @@ def two_sum_z3(nums, target):
 
 
 # Example usage
-nums = [1, 3, 9, 11, 14, 15, 20]
-target = 25
-
-print('Solving Two Sum Problem using Z3:')
-result = two_sum_z3(nums, target)
-if result:
-    i, j = result
-    print(f"Indices: {i}, {j}")
-    print(
-        f"Numbers: {nums[i]}, {nums[j]}, because {nums[i]} + {nums[j]} = {target}")
-else:
-    print("No solution found")
+run_solvers([1, 3, 9, 11, 14, 15, 20], 25)
+run_solvers([2, 4, 6, 8, 10, 12], 16)
+# result = two_sum_z3(nums, target)
+# if result:
+#     i, j = result
+#     print(f"Indices: {i}, {j}")
+#     print(
+#         f"Numbers: {nums[i]}, {nums[j]}, because {nums[i]} + {nums[j]} = {target}")
+# else:
+#     print("No solution found")
