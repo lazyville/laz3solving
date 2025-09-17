@@ -1,0 +1,10 @@
+[project]
+name = "z3solving"
+version = "0.1.0"
+description = "Solve Standard Algorithmic problems using Z3 SMT Solver"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "func-timeout>=4.3.5",
+    "z3-solver>=4.15.3.0",
+]
